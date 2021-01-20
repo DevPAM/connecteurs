@@ -61,7 +61,7 @@ public abstract class WebRequest {
         // Get connection result.
         StringBuilder result = new StringBuilder();
         String reading = null;
-        while((reading = br.readLine()) != null) result.append(reading);
+        while((reading = br.readLine()) != null) result.append(reading.trim());
         br.close();
         // Return the result.
         return result.toString();
