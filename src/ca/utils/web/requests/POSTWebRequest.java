@@ -10,12 +10,10 @@ public class POSTWebRequest extends WebRequest  {
     public POSTWebRequest( String address) {
         super(EWebRequestMethod.POST, address);
     }
-
     @Override
     public void addParameter(String key, String value) {
-
+        return;
     }
-
     @Override
     public String send() {
         return null;
