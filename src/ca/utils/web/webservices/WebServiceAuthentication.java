@@ -20,6 +20,6 @@ public class WebServiceAuthentication extends WebService implements IAuthenticat
     }
     @Override
     public String getBase64Authentication() {
-        return Base64.getEncoder().encodeToString((String.format("%s=%s", this.login, this.password).getBytes()));
+        return Base64.getEncoder().encodeToString((String.format("%s:%s", this.login, this.password).getBytes()));
     }
 }

@@ -5,6 +5,7 @@ import ca.utils.web.requests.general.EWebRequestMethod;
 import ca.utils.web.requests.general.WebRequest;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 /** The GET web request class. */
 public class GETWebRequest extends WebRequest {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 /** Basic web request class. */
@@ -57,10 +58,10 @@ public abstract class WebRequest {
     protected String readResponse(HttpURLConnection connection) throws IOException, ConnectionNullException {
         // Test the preconditions
         if(connection == null) throw new ConnectionNullException();
-        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(),  "utf-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
         // Get connection result.
         StringBuilder result = new StringBuilder();
-        String reading = null;
+        String reading;
         while((reading = br.readLine()) != null) result.append(reading.trim());
         br.close();
         // Return the result.
