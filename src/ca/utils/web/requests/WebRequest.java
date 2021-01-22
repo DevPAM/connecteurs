@@ -1,4 +1,4 @@
-package ca.utils.web.requests.general;
+package ca.utils.web.requests;
 
 import ca.utils.web.exceptions.headers.KeyHeaderNullException;
 import ca.utils.web.exceptions.headers.ValueHeaderNullException;
@@ -18,6 +18,8 @@ public abstract class WebRequest {
     protected String address;
     /** The header's value. */
     private final HashMap<String, String> headers;
+    /** The body of the web request. */
+    private final StringBuilder body;
     /** The web request's method. */
     private final EWebRequestMethod method;
     /** Initialize a new instance of {@link WebRequest} class.
@@ -27,6 +29,13 @@ public abstract class WebRequest {
         this.method = method;
         this.address = address;
         this.headers = new HashMap<>();
+        this.body = new StringBuilder();
+    }
+    /** Adds an element to the web address.
+     * @param to_add Item added to web address. */
+    public void addToAddress(String to_add) {
+        if(to_add == null || to_add.isEmpty() || to_add.isBlank()) return;
+        this.address = String.format("%s/%s", this.address, to_add);
     }
     /** Add a value to the header.
      * @param key The headers key .
@@ -38,6 +47,11 @@ public abstract class WebRequest {
         // Set the headers.
         this.headers.put(key, value);
     }
+    /** Adds an element to the body of the request.
+     * @param to_add The element to add. */
+    protected void addToBody(String to_add){
+        this.body.append(to_add);
+    }
     /** Get the connection to the URL address.
      * @return  HttpURLConnection The connection to the web request URL. */
     protected HttpURLConnection getBasicConnexion() throws IOException {
@@ -47,8 +61,13 @@ public abstract class WebRequest {
         // Set web request's method connection.
         connection.setRequestMethod(this.method.value);
         // Set the headers.
-        for(String key : this.headers.keySet()) connection.setRequestProperty(key, this.headers.get(key));
+        for(String key : this.headers.keySet()) {
+            connection.setRequestProperty(key, this.headers.get(key));
+            System.out.println(String.format("%s : %s", key, this.headers.get(key)));
+        }
+        connection.setUseCaches(false);
         connection.setDoOutput(true);
+        connection.setDoInput(true);
         // Return the connection.
         return connection;
     }
@@ -58,16 +77,28 @@ public abstract class WebRequest {
     protected String readResponse(HttpURLConnection connection) throws IOException, ConnectionNullException {
         // Test the preconditions
         if(connection == null) throw new ConnectionNullException();
+        connection.connect();
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
         // Get connection result.
         StringBuilder result = new StringBuilder();
         String reading;
         while((reading = br.readLine()) != null) result.append(reading.trim());
         br.close();
+        connection.disconnect();
         // Return the result.
         return result.toString();
+    }
+    /** Retrieve the value of the body of the request.
+     * @return String The value of the body of the request. */
+    public String getBody() {
+        return this.body.toString();
     }
     /** Send the request to the URL address.
      * @return String The web request's response. */
     public abstract String send() throws IOException, ConnectionNullException;
+    /** Add an argument to the query.
+     * @param key The name of the value to add.
+     * @param value The value to add. */
+    public abstract void addArgument(String key, String value);
+
 }

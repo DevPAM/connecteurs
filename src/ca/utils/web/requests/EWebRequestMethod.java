@@ -1,4 +1,4 @@
-package ca.utils.web.requests.general;
+package ca.utils.web.requests;
 
 /** Enumeration of web request methods. */
 public enum EWebRequestMethod {
