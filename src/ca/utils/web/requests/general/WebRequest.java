@@ -67,8 +67,6 @@ public abstract class WebRequest {
         // Return the result.
         return result.toString();
     }
-    /** Add a parameter into the web request. */
-    public abstract void addParameter(String key, String value);
     /** Send the request to the URL address.
      * @return String The web request's response. */
     public abstract String send() throws IOException, ConnectionNullException;

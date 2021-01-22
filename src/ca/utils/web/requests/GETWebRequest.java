@@ -5,7 +5,6 @@ import ca.utils.web.requests.general.EWebRequestMethod;
 import ca.utils.web.requests.general.WebRequest;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 /** The GET web request class. */
 public class GETWebRequest extends WebRequest {
@@ -16,17 +15,6 @@ public class GETWebRequest extends WebRequest {
     public GETWebRequest(String address) {
         super(EWebRequestMethod.GET, address);
         this.alreadyHasParameter = false;
-    }
-    @Override
-    public void addParameter(String key, String value) {
-        String separator = null;
-        if(this.alreadyHasParameter) {
-            separator = "?";
-            this.alreadyHasParameter = true;
-        }else separator ="&";
-        StringBuilder new_address = new StringBuilder(this.address);
-        new_address.append(String.format("%s%s=%s", separator, key, value));
-        this.address = new_address.toString();
     }
     @Override
     public String send() throws IOException, ConnectionNullException {
