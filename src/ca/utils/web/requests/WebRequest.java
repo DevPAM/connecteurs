@@ -61,10 +61,7 @@ public abstract class WebRequest {
         // Set web request's method connection.
         connection.setRequestMethod(this.method.value);
         // Set the headers.
-        for(String key : this.headers.keySet()) {
-            connection.setRequestProperty(key, this.headers.get(key));
-            System.out.println(String.format("%s : %s", key, this.headers.get(key)));
-        }
+        for(String key : this.headers.keySet()) connection.setRequestProperty(key, this.headers.get(key));
         connection.setUseCaches(false);
         connection.setDoOutput(true);
         connection.setDoInput(true);

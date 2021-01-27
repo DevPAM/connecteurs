@@ -1,14 +1,11 @@
 package ca.utils.web.webservices.services.post;
 
-import ca.utils.web.exceptions.send.ConnectionNullException;
 import ca.utils.web.requests.post.POSTWebRequest;
 import ca.utils.web.webservices.definitions.IWebService;
 import ca.utils.web.webservices.services.Service;
 
-import java.io.IOException;
-
 /** Define a service that use the POST method. */
-public class POSTService extends Service /*extends POSTWebRequest implements IService*/ {
+public class POSTService extends Service {
     /** The service web service. */
     protected IWebService service;
     /** Initialize a new instance of {@link POSTService} class.

@@ -3,7 +3,7 @@ package ca.utils.web.requests.post;
 import ca.utils.web.exceptions.headers.KeyHeaderNullException;
 import ca.utils.web.exceptions.headers.ValueHeaderNullException;
 
-public class POSTMultipartFormDataWebRequest extends POSTWebRequest {
+    public class POSTMultipartFormDataWebRequest extends POSTWebRequest {
     /** Value of the boundary between the parameters of the request body. */
     private final String boundary;
     /** Line break value in the request body. */
