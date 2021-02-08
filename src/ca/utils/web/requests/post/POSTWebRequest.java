@@ -26,7 +26,6 @@ public class POSTWebRequest extends WebRequest  {
         // Write the body in the connexion.
         DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
         dos.writeBytes(this.getBody());
-        System.out.println(this.getBody());
         // Send and close.
         dos.flush(); dos.close();
         // Return the result.
